@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --dark: #0d0d0d;
+  --light: #fff;
+  --pink: #f31caa;
+  --grey: #4a4747;
+  --violet: #ad3eff;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--dark) !important;
+  color: var(--light);
+  font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--light);
+}
+
+.btn-custom {
+  background: var(--violet);
+  color: var(--light);
+  text-transform: uppercase;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  border-radius: 25px 0 25px 0;
+}
+
+.btn-custom:hover {
+  background: var(--dark);
+  color: var(--light);
+  border: 1px solid var(--light);
+  background: #af3eff84;
+}
+
+.link-custom {
+  color: var(--pink) !important;
+}
+
+.link-custom:hover {
+  color: var(--violet) !important;
+}
+
+.icon{
+  color: #6c757d;
+}
+
+.icon:hover{
+  color: var(--light);
+}
+
+.form-control::placeholder{
+  color: #6c757d;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(243, 28, 171, 0.6);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0.6);
+  outline: 0 none;
+}
+

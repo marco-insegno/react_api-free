@@ -1,0 +1,9 @@
+.navbar-custom{
+    background: var(--dark);
+    text-transform:uppercase;
+    color: white;
+}
+
+.nav-link{
+    color: white;
+}
