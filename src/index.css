@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Mono:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
 
 * {
   padding: 0;
@@ -22,6 +22,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.section-home{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-api{
+  min-height: 100vh;
+}
+
 h1,
 h2,
 h3,
@@ -34,19 +45,22 @@ h6 {
 }
 
 .btn-custom {
-  background: var(--violet) !important;
+  background: linear-gradient(45deg, rgba(216,106,194,1) 0%, rgba(150,104,234,1) 100%);
   color: var(--light) !important;
   text-transform: uppercase;
   padding: 15px 25px !important;
   font-size: 1.2rem !important;
   border-radius: 25px 0 25px 0 !important;
+  border: 1px solid var(--light)!important;
+  transition: 0.3s !important;
+
 }
 
 .btn-custom:hover {
-  background: var(--dark)!important;
+  background: linear-gradient(45deg, rgba(216,106,194,0.7) 0%, rgba(150,104,234,0.7) 100%);
   color: var(--light)!important;
-  border: 1px solid var(--light)!important;
-  background: #af3eff84!important;
+  transition: 0.3s !important;
+  transform: scale(1.05);
 }
 
 .link-custom {
@@ -55,38 +69,5 @@ h6 {
 
 .link-custom:hover {
   color: var(--violet) !important;
-}
-
-.icon{
-  color: #6c757d;
-}
-
-.icon:hover{
-  color: var(--light);
-}
-
-.form-control::placeholder{
-  color: #6c757d;
-}
-
-textarea:focus,
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="datetime"]:focus,
-input[type="datetime-local"]:focus,
-input[type="date"]:focus,
-input[type="month"]:focus,
-input[type="time"]:focus,
-input[type="week"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus,
-input[type="url"]:focus,
-input[type="search"]:focus,
-input[type="tel"]:focus,
-input[type="color"]:focus,
-.uneditable-input:focus {   
-  border-color: rgba(243, 28, 171, 0.6);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0.6);
-  outline: 0 none;
 }
 

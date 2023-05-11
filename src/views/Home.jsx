@@ -1,54 +1,40 @@
-import React, { useEffect } from 'react'
-import Hero from '../components/Hero'
-import img from '../images/nft-img.png'
-import Form from 'react-bootstrap/Form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import React from 'react'
 import { Player } from '@lottiefiles/react-lottie-player';
 import animationHome from '../images/animation-home.json'
-// https://api.publicapis.org/entries
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function Home() {
-
-  const image = img;
-
-  const animation =
-    <Player
-      autoplay
-      loop
-      src={animationHome}
-      style={{ height: '80%' }}
-    >
-    </Player>
 
   return (
     <>
 
-    <main className='container min-vh-100 d-flex flex-column justify-content-center'>
-
-      <Hero img={image} animation={animation}>The easiest way to find API Free.</Hero>
-      {/* <section className="container mt-5 pt-5">
-        <div className="row justify-content-between text-center text-md-start align-items-center">
-          <div className="col-12 col-md-8">
-            <h2 className='fs-1'>Search your api</h2>
+      <section className="container section-home mt-5">
+        <div className="row align-items-center">
+          <div className="col-12 col-md-6 text-center text-md-start">
+            <h1 className='display-2'>The easiest way to find Public API.</h1>
+            <Link to='/api'>
+            <Button variant="link fs-1 text-decoration-none link-custom px-0 mt-5" >Find Now
+              <span className='ms-3'>
+                <FontAwesomeIcon icon={faArrowRight} />
+              </span>
+            </Button>
+            </Link>
+          </div>
+          <div className="col-12 col-md-6 text-center text-md-start mt-5 mt-md-0">
+            <Player
+              autoplay
+              loop
+              src={animationHome}
+              style={{ height: '80%' }}
+            >
+            </Player>
           </div>
         </div>
+      </section>
 
-        <div className="row mt-5 d-flex justify-content-center justify-content-md-start">
-          <div className="col-8 col-md-4">
-            <Form onSubmit={(e) => { e.preventDefault() }
-            }>
-              <Form.Group className="mb-3 position-relative" controlId="formGroupSearch">
-                <Form.Control type="text" placeholder="Search..." className='bg-dark rounded-5 text-white px-3' />
-                <button type='submit' className='btn position-absolute end-0 top-0'>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} className='icon' />
-                </button>
-              </Form.Group>
-            </Form>
-          </div>
-        </div>
-      </section > */}
-    </main>
     </>
   )
 }

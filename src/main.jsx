@@ -4,9 +4,17 @@ import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import { BrowserRouter as Router } from 'react-router-dom';
+import { AppProvider } from './context.jsx';
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Router>
-    <App />
-  </Router>
+  <>
+    <AppProvider>
+      <Router>
+        <App />
+      </Router>
+    </AppProvider>
+
+  </>
+
 )
