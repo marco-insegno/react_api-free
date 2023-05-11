@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useGlobalContext } from '../context'
 import useTitle from '../useTitle'
@@ -8,18 +8,33 @@ import animationApi from '../images/animation-api-page.json';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faAnglesUp } from '@fortawesome/free-solid-svg-icons';
+import { motion } from "framer-motion"
 
 function ApiPage() {
 
     const { name } = useParams()
 
-    const { loading, error, data, count } = useGlobalContext()
+    const {
+        loading,
+        error,
+        data,
+        scrollPosition,
+        getScrollPosition,
+    } = useGlobalContext()
 
     const filteredApi = data.filter((el) => el.API === name)
 
     const filtered = filteredApi[0];
 
     useTitle(`${filtered ? filtered.API : `Not Found`}`)
+
+
+    useEffect(() => { 
+
+        window.scrollTo(0, 0);
+        console.log('ciao')
+
+    } ,[]);
 
     return (
         <>
@@ -38,13 +53,11 @@ function ApiPage() {
                     </section>
                     : filtered ?
 
-                        
-
                         <section className="container mt-5 py-5 vh-100">
                             <section className="container mt-5 py-5 mt-md-1 py-md-1">
-                                <div className="row border">
+                                <div className="row">
 
-                                    <div className="col-12 col-md-6 d-flex flex-column justify-content-center border">
+                                    <div className="col-12 col-md-6 d-flex flex-column justify-content-center align-items-center align-items-md-start">
 
                                         <div className='position-relative'>
                                             <h5 className='p-2 position-absolute top-0' style={{
@@ -54,19 +67,26 @@ function ApiPage() {
                                             <h1 className='mt-5'>{filtered.API}</h1>
                                             <h4 className='fst-italic my-5'>{filtered.Description}</h4>
 
-                                            <Link to='/api'>
-                                                <Button variant="link fs-1 text-decoration-none link-custom px-0" >
-                                                    <span className='me-3'>
-                                                        <FontAwesomeIcon icon={faArrowLeft} />
-                                                    </span>Come Back
-                                                </Button>
-                                            </Link>
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.5 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{
+                                                    duration: 0.8,
+                                                    delay: 0.5,
+                                                    ease: [0, 0.71, 0.2, 1.01]
+                                                }}>
+                                                <Link to='/api'>
+                                                    <Button variant="link fs-2 text-decoration-none link-custom px-0" onClick={() => getScrollPosition(scrollPosition)} >
+                                                        <span className='me-3'>
+                                                            <FontAwesomeIcon icon={faArrowLeft} />
+                                                        </span>Come Back
+                                                    </Button>
+                                                </Link>
+                                            </motion.div>
                                         </div>
                                     </div>
 
-
-
-                                    <div className="col-12 col-md-6 border">
+                                    <div className="col-12 col-md-6">
                                         <a href={filtered.Link} target='_blank' rel='noreferrer'>
                                             <Player
                                                 autoplay
@@ -77,11 +97,26 @@ function ApiPage() {
                                             </Player>
                                         </a>
 
-                                        <div className='text-center'>
-                                            <FontAwesomeIcon icon={faAnglesUp} className='fa-3x text-white' />
-                                            <h2 className='mt-3'>Visit</h2>
-                                        </div>
 
+                                        <motion.div
+                                            animate={{
+                                                scale: [1, 0.8, 0.8, 1, 1],
+                                                rotate: [0, 0, 0, 0, 0],
+                                                borderRadius: ["0%", "0%", "50%", "50%", "0%"]
+                                            }}
+                                            transition={{
+                                                duration: 2,
+                                                ease: "easeInOut",
+                                                times: [0, 0.2, 0.5, 0.8, 1],
+                                                repeat: Infinity,
+                                                repeatDelay: 1
+                                            }}
+                                        >
+                                            <div className='text-center'>
+                                                <FontAwesomeIcon icon={faAnglesUp} className='fa-3x text-white' />
+                                                <h2 className='mt-3'>Visit</h2>
+                                            </div>
+                                        </motion.div>
                                     </div>
                                 </div>
                             </section>

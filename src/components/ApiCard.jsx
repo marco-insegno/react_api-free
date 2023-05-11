@@ -5,11 +5,28 @@ import './styles/apiCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import { Link as Url } from 'react-router-dom';
+import { useGlobalContext } from '../context';
+import { useNavigate } from "react-router-dom";
 
 function ApiCard({ API, Description, Category, Link }) {
 
+    const { getScrollPosition} = useGlobalContext();
+
+    const navigate = useNavigate();
+
+    const goToApiPage = (name) => {
+        getScrollPosition(window.pageYOffset)
+        navigate(`/api/${API}`)
+    }
+
+
     return (
-        <div className="col- col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div className="col- col-sm-6 col-md-4 col-lg-3 mb-4"
+            onClick={() => goToApiPage(API)}
+            style={{
+                cursor: 'pointer'
+            }}>
+
             <Card className='custom-card position-relative'>
                 <div className='ps-3 py-2 border-bottom header-card'>{Category}</div>
                 <Card.Body>
@@ -19,12 +36,13 @@ function ApiCard({ API, Description, Category, Link }) {
                     </Card.Text>
 
                 </Card.Body>
-                <Url to={`/api/${API}`}>
-                    <Button variant="link text-decoration-none link-custom position-absolute end-0 bottom-0">
-                        <FontAwesomeIcon icon={faAnglesRight} />
-                    </Button>
-                </Url>
+
+                <Button variant="link text-decoration-none link-custom position-absolute end-0 bottom-0">
+                    <FontAwesomeIcon icon={faAnglesRight} />
+                </Button>
+
             </Card>
+
         </div>
     )
 }

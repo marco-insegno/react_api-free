@@ -8,12 +8,26 @@ function AppProvider({ children }) {
 
     const {loading, error, data, count} = useFetch();
 
+    const [scrollPosition, setScrollPosition] = useState(0)
+
+    const getScrollPosition = (value) => {
+        setScrollPosition(value)
+    }
+
+    const deleteScrollPosition = (value) => {
+        setScrollPosition(0)
+    }
+
     return (
         <AppContext.Provider value={{
             loading,
             error,
             data,
-            count,}}>
+            count,
+            scrollPosition,
+            getScrollPosition,
+            deleteScrollPosition
+            }}>
 
             {children}
 

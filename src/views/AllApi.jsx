@@ -1,4 +1,4 @@
-import React from 'react'
+import React , {useEffect} from 'react'
 import { useGlobalContext } from '../context';
 import Loader from '../components/Loader';
 import ApiCard from '../components/ApiCard';
@@ -7,8 +7,17 @@ import { Link } from 'react-router-dom';
 
 function AllApi() {
 
-  // l'array di oggetti mi arriva dal context poichè passato attraverso attrivuto value del Provider
-  const { loading, error, data, count } = useGlobalContext()
+  // l'array di oggetti mi arriva dal context poichè passato attraverso attributo value del Provider
+  const { loading, error, data, scrollPosition, deleteScrollPosition } = useGlobalContext()
+
+  useEffect(() =>{
+      if(scrollPosition>0){
+          window.scrollTo(0,scrollPosition )
+          deleteScrollPosition()
+      } else{
+        window.scrollTo(0,0 )
+      }
+  },[])
 
   return (
     <>
