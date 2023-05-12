@@ -1,21 +1,20 @@
-import { useState, useEffect, createContext, useContext } from "react";
-
-import useFetch from "./useFetch";
+import { createContext, useContext, useState } from 'react'
+import useFetch from './useFetch';
 
 const AppContext = createContext();
 
 function AppProvider({ children }) {
 
-    const {loading, error, data, count} = useFetch();
+    const { loading, error, data } = useFetch();
 
-    const [scrollPosition, setScrollPosition] = useState(0)
+    const [scrollPosition,setScrollPosition] = useState(0);
 
     const getScrollPosition = (value) => {
-        setScrollPosition(value)
+        setScrollPosition(value);
     }
 
     const deleteScrollPosition = (value) => {
-        setScrollPosition(0)
+        setScrollPosition(0);
     }
 
     return (
@@ -23,14 +22,11 @@ function AppProvider({ children }) {
             loading,
             error,
             data,
-            count,
             scrollPosition,
             getScrollPosition,
             deleteScrollPosition
-            }}>
-
+        }}>
             {children}
-
         </AppContext.Provider>
     )
 }

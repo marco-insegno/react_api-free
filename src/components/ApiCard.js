@@ -1,31 +1,31 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import './styles/apiCard.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
-import { Link as Url } from 'react-router-dom';
+import './styles/apiCard.css';
+import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
-import { useNavigate } from "react-router-dom";
 
-function ApiCard({ API, Description, Category, Link }) {
+function ApiCard({ API, Description, Category }) {
 
-    const { getScrollPosition} = useGlobalContext();
+    const { getScrollPosition } = useGlobalContext();
 
     const navigate = useNavigate();
 
     const goToApiPage = (name) => {
         getScrollPosition(window.pageYOffset)
-        navigate(`/api/${API}`)
+        navigate(`/api/${API}`);
     }
 
-
     return (
-        <div className="col- col-sm-6 col-md-4 col-lg-3 mb-4"
+        <div
+            className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
             onClick={() => goToApiPage(API)}
             style={{
                 cursor: 'pointer'
-            }}>
+            }}
+        >
 
             <Card className='custom-card position-relative'>
                 <div className='ps-3 py-2 border-bottom header-card'>{Category}</div>
@@ -42,6 +42,7 @@ function ApiCard({ API, Description, Category, Link }) {
                 </Button>
 
             </Card>
+
 
         </div>
     )
