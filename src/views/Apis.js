@@ -1,12 +1,62 @@
-import React, {useEffect} from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import ApiCard from '../components/ApiCard';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { motion } from "framer-motion"
+import Alert from 'react-bootstrap/Alert';
 
 function Apis() {
 
     const { loading, error, data, scrollPosition, deleteScrollPosition } = useGlobalContext()
+
+    const [count, setCount] = useState('');
+
+
+
+    const [notFound, setNotFound] = useState(false);
+
+    const [filtered, setFiltered] = useState({
+        input: '',
+        list: []
+    })
+
+    const handleChange = (e) => {
+
+        e.preventDefault()
+
+        setNotFound(false)
+
+        const results = data.filter((el) => {
+            if (e.target.value === '') {
+                return data
+            }
+            return el.API.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+
+        setFiltered({
+            input: e.target.value,
+            list: results
+        })
+
+        setCount(results.length)
+
+    };
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault()
+
+        if (filtered.list.length === 0) {
+
+            setNotFound(true)
+        }
+    }
+
 
     useEffect(() => {
         if (scrollPosition > 0) {
@@ -16,7 +66,6 @@ function Apis() {
             window.scrollTo(0, 0)
         }
     }, [])
-
 
     return (
         <>
@@ -57,20 +106,96 @@ function Apis() {
 
                     <section className="container pb-5">
 
-                        <div className="row">
+                        <div className="row justify-content-between mb-5">
 
-                            {
-                                data && data.map((api, index) => {
-                                    return (
-                                        <ApiCard key={index} {...api} />
-                                    )
-                                })
-                            }
+                            <div className="col-12 col-md-6 ">
+                                <h1 className='mb-0'>Search your Api</h1>
+                            </div>
+
+                            <div className="col-12 col-md-6 d-flex justify-content-start justify-content-md-end align-items-center mt-3 mt-md-0">
+                                <Form onSubmit={handleSubmit}>
+                                    <Form.Group className="mb-3 mb-md-0 position-relative" controlId="formBasicEmail">
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Search..."
+                                            className='input-custom'
+                                            onChange={handleChange} />
+
+                                        <Button variant="link" type="submit" className='position-absolute top-0 end-0'>
+                                            <FontAwesomeIcon icon={faEye} className='icon-custom' />
+                                        </Button>
+
+                                        <p className='mt-1 mb-0 fst-italic text-muted text-md-end'>{
+
+                                            count === ''
+                                                ? ''
+                                                : count === 0
+                                                    ? <Alert className='alert-custom mt-2 p-2 text-center'>
+                                                        Not Found !!!
+                                                    </Alert>
+                                                    : count === 1
+                                                        ? `Found ${count} item`
+                                                        : `Found ${count} items`
+                                        }</p>
+                                    </Form.Group>
+
+                                </Form>
+                            </div>
 
                         </div>
+
+
+
+                        {
+                            filtered.list.length === 0 && !notFound
+                                ?
+                                <div className="row">
+
+                                    {
+                                        data && data.map((api, index) => {
+                                            return (
+                                                <ApiCard key={index} {...api} />
+                                            )
+                                        })
+                                    }
+
+                                </div>
+                                : (filtered.list.length > 0 && !notFound) ?
+
+
+                                    <div className="row">
+
+                                        {
+                                            filtered.list.map((api, index) => {
+                                                return (
+                                                    <ApiCard key={index} {...api} />
+                                                )
+                                            })
+                                        }
+
+                                    </div>
+                                    :
+
+                                    <div className="row pt-5">
+                                        <div className="col-12 pt-5 text-center">
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.5 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 1.5 }}
+                                            >
+                                                <h2 className='text-danger fst-italic'>No item found with this name...</h2>
+                                            </motion.div>
+                                        </div>
+                                    </div>
+
+
+                        }
+
+
                     </section>
-                </section>
+                </section >
             }
+
 
         </>
     )

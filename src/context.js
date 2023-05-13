@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 function AppProvider({ children }) {
 
-    const { loading, error, data } = useFetch();
+    const { loading, error, data} = useFetch();
 
     const [scrollPosition,setScrollPosition] = useState(0);
 

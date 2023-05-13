@@ -37,8 +37,8 @@ function ApiCard({ API, Description, Category }) {
 
                 </Card.Body>
 
-                <Button variant="link text-decoration-none link-custom position-absolute end-0 bottom-0">
-                    <FontAwesomeIcon icon={faAnglesRight} />
+                <Button variant="link" className='text-decoration-none link-custom position-absolute end-0 bottom-0'>
+                    <FontAwesomeIcon icon={faAnglesRight} onClick={() => goToApiPage(API)} />
                 </Button>
 
             </Card>

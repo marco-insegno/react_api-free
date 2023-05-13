@@ -55,7 +55,7 @@ function ApiPage() {
                                             border: '1px solid var(--violet)',
                                             color: 'var(--pink)'
                                         }}>{filtered.Category}</h5>
-                                        <h1 className='mt-5'>{filtered.API}</h1>
+                                        <h1 className='mt-1'>{filtered.API}</h1>
                                         <h4 className='fst-italic my-5 text-center text-md-start'>{filtered.Description}</h4>
 
                                         <motion.div
@@ -104,7 +104,7 @@ function ApiPage() {
                                     >
                                         <div className='text-center'>
                                             <FontAwesomeIcon icon={faAnglesUp} className='fa-3x text-white' />
-                                            <h2 className=''>Visit</h2>
+                                            <h2 className='mt-3'>Visit</h2>
                                         </div>
                                     </motion.div>
                                 </div>
