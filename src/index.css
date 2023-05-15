@@ -75,7 +75,6 @@ h6 {
   background: #ffffff1f;
   color: var(--light);
   font-family: 'Roboto Mono', monospace;
-
 }
 
 .input-custom::placeholder {
@@ -108,4 +107,25 @@ input[type="search"]:focus {
   text-transform: uppercase;
   background: var(--pink);
   color: var(--light);
+}
+
+.box-category-custom{
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  text-align: center;
+  background: var(--violet);
+  text-transform: uppercase;
+  flex-wrap: nowrap;
+  transition: 0.15s;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.box-category-custom:hover{
+  background: var(--pink);
+  cursor: pointer;
+  transform: scale(1.03);
+  transition: 0.15s;
+  font-weight: bolder;
 }

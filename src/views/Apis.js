@@ -12,11 +12,9 @@ import Alert from 'react-bootstrap/Alert';
 
 function Apis() {
 
-    const { loading, error, data, scrollPosition, deleteScrollPosition } = useGlobalContext()
+    const { loading, error, data, scrollPosition, deleteScrollPosition, uniqueCategories } = useGlobalContext()
 
     const [count, setCount] = useState('');
-
-
 
     const [notFound, setNotFound] = useState(false);
 
@@ -25,9 +23,8 @@ function Apis() {
         list: []
     })
 
-    const handleChange = (e) => {
 
-        e.preventDefault()
+    const handleChange = (e) => {
 
         setNotFound(false)
 
@@ -55,6 +52,17 @@ function Apis() {
 
             setNotFound(true)
         }
+    }
+
+    // categorie button
+    const getApiByCategory = (category) => {
+        const apisByCategory = data.filter((el) => el.Category === category)
+
+        setFiltered({
+            list: apisByCategory
+        })
+
+        window.scrollTo(0, 0)
     }
 
 
@@ -89,6 +97,7 @@ function Apis() {
                         <div className="col-12 d-flex flex-column justify-content-center text-danger">
                             <h1 className='text-danger'>!!! Data fetching failed !!!</h1>
                             <h4 className='text-danger'>Something went wrong in the fetch call...</h4>
+                            <h4 className='text-danger'>... retry few later ⌛</h4>
                             <Link to='/'>
                                 <button className='btn btn-custom mt-5'>Back to Home</button>
                             </Link>
@@ -97,7 +106,6 @@ function Apis() {
                 </section>
 
             }
-
 
             {
                 !loading && !error &&
@@ -144,58 +152,69 @@ function Apis() {
 
                         </div>
 
+                        <div className="row">
 
+                            <div className="col-12 col-sm-3 col-lg-2 px-0">
+                                {
+                                    uniqueCategories && uniqueCategories.map((category, index) => {
+                                        return (
+                                            <div key={index} className="col-12 border box-category-custom" >
+                                                <Button variant="link" className='text-decoration-none text-white' onClick={(e) => getApiByCategory(e.target.innerText)}>
+                                                    {category}
+                                                </Button>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
 
-                        {
-                            filtered.list.length === 0 && !notFound
-                                ?
-                                <div className="row">
+                            <div className="col-12 col-sm-9 col-lg-10 ">
 
-                                    {
-                                        data && data.map((api, index) => {
+                                {filtered.list.length === 0 && !notFound
+                                    ?
+                                    <div className="row">
+                                        {data && data.map((api, index) => {
                                             return (
                                                 <ApiCard key={index} {...api} />
                                             )
-                                        })
-                                    }
-
-                                </div>
-                                : (filtered.list.length > 0 && !notFound) ?
-
-
-                                    <div className="row">
-
-                                        {
-                                            filtered.list.map((api, index) => {
-                                                return (
-                                                    <ApiCard key={index} {...api} />
-                                                )
-                                            })
-                                        }
-
+                                        })}
                                     </div>
                                     :
+                                    (filtered.list.length > 0 && !notFound)
+                                        ?
+                                        <div className="row">
 
-                                    <div className="row pt-5">
-                                        <div className="col-12 pt-5 text-center">
-                                            <motion.div
-                                                initial={{ opacity: 0, scale: 0.5 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 1.5 }}
-                                            >
-                                                <h2 className='text-danger fst-italic'>No item found with this name...</h2>
-                                            </motion.div>
+                                            {
+                                                filtered.list.map((api, index) => {
+                                                    return (
+                                                        <ApiCard key={index} {...api} />
+                                                    )
+                                                })
+                                            }
+
                                         </div>
-                                    </div>
+                                        :
 
+                                        <div className="row pt-5">
+                                            <div className="col-12 pt-5 text-center">
+                                                <motion.div
+                                                    initial={{ opacity: 0, scale: 0.5 }}
+                                                    animate={{ opacity: 1, scale: 1 }}
+                                                    transition={{ duration: 1.5 }}
+                                                >
+                                                    <h2 className='text-danger fst-italic'>No item found with this name...</h2>
+                                                </motion.div>
+                                            </div>
+                                        </div>
+                                }
 
-                        }
+                            </div>
 
+                        </div>
 
                     </section>
                 </section >
             }
-
 
         </>
     )

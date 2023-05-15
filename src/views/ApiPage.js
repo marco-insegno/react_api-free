@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useParams } from 'react-router-dom';
 import { useGlobalContext } from '../context';
 import Loader from '../components/Loader';
@@ -22,15 +22,13 @@ function ApiPage() {
         data,
         scrollPosition,
         getScrollPosition,
-        deleteScrollPosition,
     } = useGlobalContext()
 
-    const filteredApi = data.filter((el) => el.API === name);
+    const filteredApi = data.filter((el) => el.API.replace(/\s/g, '').toLowerCase() === name);
 
     const filtered = filteredApi[0];
 
     useTitle(`${filtered ? filtered.API : `Not Found`}`)
-
 
     return (
         <>
@@ -57,7 +55,6 @@ function ApiPage() {
                                         }}>{filtered.Category}</h5>
                                         <h1 className='mt-1'>{filtered.API}</h1>
                                         <h4 className='fst-italic my-5 text-center text-md-start'>{filtered.Description}</h4>
-
                                         <motion.div
                                             initial={{ opacity: 0, scale: 0.5 }}
                                             animate={{ opacity: 1, scale: 1 }}
@@ -66,7 +63,9 @@ function ApiPage() {
                                                 delay: 0.5,
                                                 ease: [0, 0.71, 0.2, 1.01]
                                             }}>
-                                            <Link to='/api'>
+
+                                            
+                                            <Link to={`/api/`}>
 
                                                 <Button variant="link link-custom px-0 fs-2 text-decoration-none" onClick={() => getScrollPosition(scrollPosition)} >
                                                     <span className='me-3'>
@@ -84,7 +83,7 @@ function ApiPage() {
                                             autoplay
                                             loop
                                             src='../images/animation-api-page.json'
-                                            style={{ height: '80%'}}
+                                            style={{ height: '80%' }}
                                         >
                                         </Player>
                                     </a>

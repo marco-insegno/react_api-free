@@ -5,9 +5,9 @@ const AppContext = createContext();
 
 function AppProvider({ children }) {
 
-    const { loading, error, data} = useFetch();
+    const { loading, error, data } = useFetch();
 
-    const [scrollPosition,setScrollPosition] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(0);
 
     const getScrollPosition = (value) => {
         setScrollPosition(value);
@@ -16,6 +16,10 @@ function AppProvider({ children }) {
     const deleteScrollPosition = (value) => {
         setScrollPosition(0);
     }
+    
+
+    const uniqueCategories = Array.from(new Set(data.map(el => el.Category)))
+
 
     return (
         <AppContext.Provider value={{
@@ -24,7 +28,8 @@ function AppProvider({ children }) {
             data,
             scrollPosition,
             getScrollPosition,
-            deleteScrollPosition
+            deleteScrollPosition,
+            uniqueCategories
         }}>
             {children}
         </AppContext.Provider>
