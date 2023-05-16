@@ -1,0 +1,22 @@
+.contact-button-custom{
+    position: fixed;
+    bottom: 5%;
+    right: 0;
+    border: 1px solid var(--pink) !important;
+    padding: 10px 15px;
+    background: var(--light);
+    color: var(--dark);
+    transform: translateX(168px);
+    transition: 0.3s;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+}
+
+.contact-button-custom:hover{
+    background:#f31cabb2;
+    color: var(--light);
+    transform: translateX(0px);
+    transform: scale(1.1) ;
+    transition: 0.3s;
+}

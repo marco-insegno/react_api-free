@@ -37,6 +37,10 @@ h6 {
   color: var(--light);
 }
 
+.font-roboto-mono{
+  font-family: 'Roboto Mono', monospace;
+}
+
 
 .container-page {
   height: 90vh;
@@ -106,6 +110,13 @@ input[type="search"]:focus {
   border-radius: 0px !important;
   text-transform: uppercase;
   background: var(--pink);
+  color: var(--light);
+}
+
+.icon-social{
+  color: var(--pink);
+}
+.icon-social:hover{
   color: var(--light);
 }
 

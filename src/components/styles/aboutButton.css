@@ -1,0 +1,22 @@
+.about-button-custom{
+    position: fixed;
+    bottom: 20%;
+    right: 0;
+    border: 1px solid white !important;
+    padding: 10px 15px;
+    background: var(--violet);
+    color: var(--light);
+    transform: translateX(68px);
+    transition: 0.3s;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 0;
+}
+
+.about-button-custom:hover{
+    background: #af3eff75;
+    color: var(--light);
+    transform: translateX(0px);
+    transform: scale(1.1) ;
+    transition: 0.3s;
+}

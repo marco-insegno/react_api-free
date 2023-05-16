@@ -11,7 +11,7 @@ function Navigation() {
                 <Container>
                     <Link to='/'>
                         <Navbar.Brand>
-                            <img src='./images/logo.png' height='60px' alt='logo-app' />
+                            <img src='./images/logo.jpg' height='60px' alt='logo-app' />
                         </Navbar.Brand>
                     </Link>
                 </Container>
